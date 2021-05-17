@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>类别 | iOS Interview</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.4ceb267e.js" as="script"><link rel="preload" href="/assets/js/2.ee589f99.js" as="script"><link rel="preload" href="/assets/js/10.eb79a817.js" as="script"><link rel="prefetch" href="/assets/js/11.5f99bde5.js"><link rel="prefetch" href="/assets/js/12.07e7067f.js"><link rel="prefetch" href="/assets/js/13.82e1903e.js"><link rel="prefetch" href="/assets/js/14.42e9583f.js"><link rel="prefetch" href="/assets/js/15.58f2d1b7.js"><link rel="prefetch" href="/assets/js/16.dbf102cc.js"><link rel="prefetch" href="/assets/js/17.561f33ff.js"><link rel="prefetch" href="/assets/js/3.52d57505.js"><link rel="prefetch" href="/assets/js/4.e7c996f5.js"><link rel="prefetch" href="/assets/js/5.db5a0810.js"><link rel="prefetch" href="/assets/js/6.17d5dd20.js"><link rel="prefetch" href="/assets/js/7.c88850e7.js"><link rel="prefetch" href="/assets/js/8.d5749cfb.js"><link rel="prefetch" href="/assets/js/9.441dae3a.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/iOS.png" alt="iOS Interview" class="logo"> <span class="site-name can-hide">iOS Interview</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/iOS/" class="nav-link router-link-active">
+  iOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/iOS/" class="nav-link router-link-active">
+  iOS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/" aria-current="page" class="sidebar-link">介绍</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>iOS 基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/foundation.html" class="sidebar-link">Foundtaion</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>内存管理</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/memory.html" class="sidebar-link">内存管理</a></li></ul></section></li><li><a href="/iOS/runloop.html" class="sidebar-link">Runloop</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Runtime</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/runtime.html" class="sidebar-link">Runtime</a></li><li><a href="/iOS/category.html" aria-current="page" class="active sidebar-link">类别</a></li></ul></section></li><li><a href="/iOS/block.html" class="sidebar-link">Block</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>性能优化</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/image.html" class="sidebar-link">iOS 图片性能优化</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>框架/架构</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/solid.html" class="sidebar-link">六大设计原则 SOLID</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>数据结构和算法</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/algorithm.html" class="sidebar-link">常见算法</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>编译</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/clang.html" class="sidebar-link">Clang</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="类别"><a href="#类别" class="header-anchor">#</a> 类别</h1> <p>在类别中添加属性：</p> <div class="language- extra-class"><pre class="language-text"><code>@interface People (Category)
+
+@property (nonatomic, copy) NSString *sname;
+
+@end
+
+</code></pre></div><p>在调用属性的<code>setter</code>和<code>getter</code>方法时会 <strong>Crash</strong> ：</p> <div class="language- extra-class"><pre class="language-text"><code>OCTest[18213:2605018] -[People setSname:]: unrecognized selector sent to instance 0x7b080007be00
+
+OCTest[18339:2610326] -[People sname]: unrecognized selector sent to instance 0x7b080007c0c0
+</code></pre></div><p><strong>类别为什么不能添加属性？</strong></p> <p>看一下 <code>Category</code> 的结构体：</p> <div class="language- extra-class"><pre class="language-text"><code>struct category_t {
+    const char *name;
+    classref_t cls;
+    struct method_list_t *instanceMethods;
+    struct method_list_t *classMethods;
+    struct protocol_list_t *protocols;
+    struct property_list_t *instanceProperties;
+    // Fields below this point are not always present on disk.
+    struct property_list_t *_classProperties;
+};
+</code></pre></div><p>分类结构体包含 类名、cls、实例方法列表、类方法列表、协议列表、属性列表。</p> <blockquote><p>我们知道 <code>Property</code> 的本质是 <code>成员变量+存取方法</code>（ivar、getter/setter），<code>@synthesize</code> 是Xcode编译器特性，它会自动生成ivar、getter/setter。</p> <p>dyld加载期间，类别才会被加载并<code>attach</code>到相应的类中，这是一个动态的过程，<code>成员变量</code>不能动态添加，因为表示<code>OC</code>类的结构体在运行时并不能改变。类别的结构体中虽然有属性列表，但是这些属性不会自动生成<code>成员变量</code>，自然也就不会合成存取方法，也就是不具备<code>@synthesize</code>的作用。</p></blockquote> <p><strong>分类的作用：</strong></p> <blockquote><p>不改变原有类，给这个类扩展方法。</p></blockquote> <p><strong>类别和扩展的区别？</strong></p> <p>两者的区别：</p> <ul><li>分类是运行时决议，扩展是编译时决议；</li> <li>分类可以添加方法，通过关联对象添加成员变量，扩展可以添加属性。</li> <li>分类既有声明头文件也有实现文件，扩展只有声明头文件，实现在类的.m文件中；</li></ul> <p><strong>类别中的方法什么时候开始合并的？</strong></p> <blockquote><p>分类是在运行时将方法列表与类的原有方法列表合并，且分类中的方法在前。</p></blockquote> <p><strong>参考：</strong></p> <p><a href="https://www.zhihu.com/question/51513146/answer/126443097" target="_blank" rel="noopener noreferrer">iOS 类别不能添加属性原理？<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://www.jianshu.com/p/fa66c8be42a2" target="_blank" rel="noopener noreferrer">iOS Category的本质<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="https://www.jianshu.com/writer#/notebooks/23278598/notes/31347042/preview" target="_blank" rel="noopener noreferrer">Category原理<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/iOS/runtime.html" class="prev">
+        Runtime
+      </a></span> <span class="next"><a href="/iOS/block.html">
+        Block
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.4ceb267e.js" defer></script><script src="/assets/js/2.ee589f99.js" defer></script><script src="/assets/js/10.eb79a817.js" defer></script>
+  </body>
+</html>

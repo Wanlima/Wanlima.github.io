@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Block本质 | iOS Interview</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/assets/css/0.styles.e4d8b86b.css" as="style"><link rel="preload" href="/assets/js/app.4ceb267e.js" as="script"><link rel="preload" href="/assets/js/2.ee589f99.js" as="script"><link rel="preload" href="/assets/js/9.441dae3a.js" as="script"><link rel="prefetch" href="/assets/js/10.eb79a817.js"><link rel="prefetch" href="/assets/js/11.5f99bde5.js"><link rel="prefetch" href="/assets/js/12.07e7067f.js"><link rel="prefetch" href="/assets/js/13.82e1903e.js"><link rel="prefetch" href="/assets/js/14.42e9583f.js"><link rel="prefetch" href="/assets/js/15.58f2d1b7.js"><link rel="prefetch" href="/assets/js/16.dbf102cc.js"><link rel="prefetch" href="/assets/js/17.561f33ff.js"><link rel="prefetch" href="/assets/js/3.52d57505.js"><link rel="prefetch" href="/assets/js/4.e7c996f5.js"><link rel="prefetch" href="/assets/js/5.db5a0810.js"><link rel="prefetch" href="/assets/js/6.17d5dd20.js"><link rel="prefetch" href="/assets/js/7.c88850e7.js"><link rel="prefetch" href="/assets/js/8.d5749cfb.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e4d8b86b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/iOS.png" alt="iOS Interview" class="logo"> <span class="site-name can-hide">iOS Interview</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/iOS/" class="nav-link router-link-active">
+  iOS
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/iOS/" class="nav-link router-link-active">
+  iOS
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/" aria-current="page" class="sidebar-link">介绍</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>iOS 基础</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/foundation.html" class="sidebar-link">Foundtaion</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>内存管理</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/memory.html" class="sidebar-link">内存管理</a></li></ul></section></li><li><a href="/iOS/runloop.html" class="sidebar-link">Runloop</a></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Runtime</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/runtime.html" class="sidebar-link">Runtime</a></li><li><a href="/iOS/category.html" class="sidebar-link">类别</a></li></ul></section></li><li><a href="/iOS/block.html" aria-current="page" class="active sidebar-link">Block</a><ul class="sidebar-sub-headers"></ul></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>性能优化</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/image.html" class="sidebar-link">iOS 图片性能优化</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>框架/架构</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/solid.html" class="sidebar-link">六大设计原则 SOLID</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>数据结构和算法</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/algorithm.html" class="sidebar-link">常见算法</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>编译</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/iOS/clang.html" class="sidebar-link">Clang</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="block本质"><a href="#block本质" class="header-anchor">#</a> Block本质</h3> <blockquote><p>封装了函数调用以及函数调用环境的<strong>OC对象</strong>。</p></blockquote> <h3 id="block类型"><a href="#block类型" class="header-anchor">#</a> Block类型</h3> <h4 id="global"><a href="#global" class="header-anchor">#</a> Global:</h4> <blockquote><p>全局Block，全局静态变量、全局变量、局部静态变量、不访问外部变量。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>int main(int argc, char * argv[]) {
+    void(^global)(void) = ^() {
+        NSLog(@&quot;这是一个全局Block！&quot;);
+    };
+
+    NSLog(@&quot;%@&quot;, global);
+
+    NSString * appDelegateClassName;
+    @autoreleasepool {
+        // Setup code that might create autoreleased objects goes here.
+        appDelegateClassName = NSStringFromClass([AppDelegate class]);
+    }
+
+    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
+}
+</code></pre></div><p>打印信息：</p> <div class="language- extra-class"><pre class="language-text"><code>$ &lt;__NSGlobalBlock__: 0x1009c4038&gt;
+</code></pre></div><h4 id="stack"><a href="#stack" class="header-anchor">#</a> Stack:</h4> <blockquote><p>访问局部变量。</p></blockquote> <p>先把main.m改为MRC，因为ARC会帮助我们做很多事情，可能会影响我们的观察:</p> <blockquote><p><code>Targets</code> -&gt; <code>Build Phases</code> 选项下 <code>Compile Sources</code> 下选择 <code>main.m</code>，双击，输入 <code>-fno-objc-arc</code>。</p></blockquote> <div class="language- extra-class"><pre class="language-text"><code>int main(int argc, char * argv[]) {
+    int d = 40;
+    void(^stack)(int, int) = ^(int a, int b) {
+        NSLog(@&quot;%d&quot;, a+b);
+        NSLog(@&quot;%d&quot;, d);
+    };
+
+    NSLog(@&quot;%@&quot;, stack);
+
+    NSString * appDelegateClassName;
+    @autoreleasepool {
+        // Setup code that might create autoreleased objects goes here.
+        appDelegateClassName = NSStringFromClass([AppDelegate class]);
+    }
+
+    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
+}
+
+</code></pre></div><p>打印信息：</p> <div class="language- extra-class"><pre class="language-text"><code>$ &lt;__NSStackBlock__: 0x16f443840&gt;
+</code></pre></div><h4 id="malloc"><a href="#malloc" class="header-anchor">#</a> Malloc:</h4> <p>对栈区Block拷贝：</p> <div class="language- extra-class"><pre class="language-text"><code>int main(int argc, char * argv[]) {
+    
+    int d = 40;
+    void(^stack)(int, int) = ^(int a, int b) {
+        NSLog(@&quot;%d&quot;, a+b);
+        NSLog(@&quot;%d&quot;, d);
+    };
+
+    NSLog(@&quot;%@&quot;, stack);
+
+    void(^malloc)(int, int) = [stack copy];
+    NSLog(@&quot;%@&quot;, malloc);
+
+    NSString * appDelegateClassName;
+    @autoreleasepool {
+        // Setup code that might create autoreleased objects goes here.
+        appDelegateClassName = NSStringFromClass([AppDelegate class]);
+    }
+
+    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
+}
+
+</code></pre></div><p>打印信息：</p> <div class="language- extra-class"><pre class="language-text"><code>$ &lt;__NSStackBlock__: 0x16b3af840&gt;
+$ &lt;__NSMallocBlock__: 0x282657540&gt;
+</code></pre></div><blockquote><p>栈上的Block，如果其所属的变量作用域结束，该Block就被废弃，如同一般的自动变量。因此， ARC 下Block访问外部变量、函数返回Block，编译器会恰当地进行判断是否有需要copy到堆上。</p></blockquote> <p>例如下面函数返回值为Block类型的函数：</p> <div class="language- extra-class"><pre class="language-text"><code>typedef int (^blk_t)(int);
+
+blk_t func(int rate) {
+    return ^(int count) { return rate * count; };
+}
+</code></pre></div><p>分析可知：</p> <p>上面的函数返回的Block是配置在栈上的，所以返回函数调用方时，Block变量作用域就结束了，Block会被废弃。但在ARC有效，这种情况编译器会自动完成复制。</p> <p>在MRC情况下则需要开发者调用copy方法手动复制，否则会报错：<code>Returning block that lives on the local stack</code>。由于开发中几乎都是ARC模式，所以手动复制内容不再过多研究。</p> <p>###Block捕获外界变量：</p> <ol><li><strong>值拷贝：局部变量、auto自动变量（离开作用域就销毁）；</strong></li> <li><strong>指针引用：Static静态变量、OC对象；</strong></li> <li><strong>全局变量任何地方都能访问，不需要捕获；</strong></li></ol> <p>###__block做了什么?</p> <p>使用命令行将代码转化为C++查看其内部结构，与OC代码进行比较</p> <div class="language- extra-class"><pre class="language-text"><code>xcrun -sdk iphoneos clang -arch arm64 -framework UIKit -rewrite-objc -fobjc-arc -fobjc-runtime=ios-9.0.0 main.m -o main.cpp
+</code></pre></div><p>不加__block修饰外部变量：</p> <div class="language- extra-class"><pre class="language-text"><code>int d = 40;
+void(^block)(void) = ^{
+    NSLog(@&quot;%d&quot;, d);
+};
+d++;
+block();
+</code></pre></div><p>C++代码：</p> <div class="language- extra-class"><pre class="language-text"><code>// block 结构体
+struct __main_block_impl_0 {
+  struct __block_impl impl;
+  struct __main_block_desc_0* Desc;
+  int d;
+  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, int _d, int flags=0) : d(_d) {
+    impl.isa = &amp;_NSConcreteStackBlock;
+    impl.Flags = flags;
+    impl.FuncPtr = fp;
+    Desc = desc;
+  }
+};
+
+// 代码块
+static void __main_block_func_0(struct __main_block_impl_0 *__cself) {
+  int d = __cself-&gt;d; // bound by copy
+  NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders____bsyl0rc97dj3tgk7r520cy880000gn_T_main_f88f53_mi_0, d);
+}
+
+int d = 40;
+// block 声明
+void(*block)(void) = ((void (*)())&amp;__main_block_impl_0((void *)__main_block_func_0, &amp;__main_block_desc_0_DATA, d));
+d++;
+// block();
+((void (*)(__block_impl *))((__block_impl *)block)-&gt;FuncPtr)((__block_impl *)block);
+</code></pre></div><p>加__block修饰外部变量：</p> <div class="language- extra-class"><pre class="language-text"><code>__block int d = 40;
+void(^block)(void) = ^{
+    NSLog(@&quot;%d&quot;, d);
+};
+d++;
+block();
+</code></pre></div><p>C++代码：</p> <div class="language- extra-class"><pre class="language-text"><code>// __block 生成的结构体
+struct __Block_byref_d_0 {
+  void *__isa;
+  __Block_byref_d_0 *__forwarding;
+ int __flags;
+ int __size;
+ int d;
+};
+
+// block 结构体
+struct __main_block_impl_0 {
+  struct __block_impl impl;
+  struct __main_block_desc_0* Desc;
+  __Block_byref_d_0 *d; // by ref
+  __main_block_impl_0(void *fp, struct __main_block_desc_0 *desc, __Block_byref_d_0 *_d, int flags=0) : d(_d-&gt;__forwarding) {
+    impl.isa = &amp;_NSConcreteStackBlock;
+    impl.Flags = flags;
+    impl.FuncPtr = fp;
+    Desc = desc;
+  }
+};
+
+// 代码块（d-&gt;__forwarding-&gt;d）
+static void __main_block_func_0(struct __main_block_impl_0 *__cself) {
+  __Block_byref_d_0 *d = __cself-&gt;d; // bound by ref
+  NSLog((NSString *)&amp;__NSConstantStringImpl__var_folders____bsyl0rc97dj3tgk7r520cy880000gn_T_main_585285_mi_0, (d-&gt;__forwarding-&gt;d));
+}
+
+// __block int d = 40;
+__attribute__((__blocks__(byref))) __Block_byref_d_0 d = {(void*)0,(__Block_byref_d_0 *)&amp;d, 0, sizeof(__Block_byref_d_0), 40};
+
+// block 声明
+void(*block)(void) = ((void (*)())&amp;__main_block_impl_0((void *)__main_block_func_0, &amp;__main_block_desc_0_DATA, (__Block_byref_d_0 *)&amp;d, 570425344));
+
+//d++;
+(d.__forwarding-&gt;d)++;
+
+// block();
+((void (*)(__block_impl *))((__block_impl *)block)-&gt;FuncPtr)((__block_impl *)block);
+</code></pre></div><p>总结：</p> <ol><li><p><strong>__block</strong> 会生成 <strong>__Block_byref_d_0</strong> 结构体，block结构体会持有它；</p></li> <li><p>外部修改变量时，会通过 <strong>d.__forwarding-&gt;d</strong> 改变 <strong>__Block_byref_d_0</strong> 结构体中的值；</p></li> <li><p>在代码块调用时，会通过block结构体持有的指针， <strong>d.__forwarding-&gt;d</strong> 获取变量的值；</p></li></ol></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/iOS/category.html" class="prev">
+        类别
+      </a></span> <span class="next"><a href="/iOS/image.html">
+        iOS 图片性能优化
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.4ceb267e.js" defer></script><script src="/assets/js/2.ee589f99.js" defer></script><script src="/assets/js/9.441dae3a.js" defer></script>
+  </body>
+</html>
